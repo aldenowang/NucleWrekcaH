@@ -172,11 +172,35 @@
     padding-left: 1rem;
   }
 
-  .hero-desc {
-    max-width: 680px;
-    color: var(--ink-dim);
-    font-size: 1rem;
-    line-height: 1.8;
+  .hero-names-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .hero-image-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 1px dashed var(--line);
+    border-radius: 4px;
+    background: var(--bg2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-faint);
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
   }
 
   .hero-cta {
@@ -557,13 +581,20 @@
       <h1>NucleWrekcaH</h1>
     </div>
 
+    <div class="hero-names-row">
+      <span class="hero-name">Name One</span>
+      <span class="hero-name">Name Two</span>
+      <span class="hero-name">Name Three</span>
+      <span class="hero-name">Name Four</span>
+    </div>
+
     <p class="hero-tagline">
-      An Adversarial AI Agent for Nuclear Physics Models: Neural Operator Vulnerability Discovery
+      Can LLMs Reason About Chaotic Effects in Physics Models?
     </p>
 
-    <p class="hero-desc" id="about">
-      NucleWrekcaH is an autonomous AI agent system designed to probe and evaluate vulnerabilities in neural operator surrogate models used for nuclear physics simulation. By coupling a reasoning-and-acting (ReAct) agent with a suite of physics-based evaluation harnesses, the system systematically identifies inputs where high-fidelity machine-learning surrogates deviate from ground-truth physics — exposing reliability gaps critical to the safe deployment of AI in high-stakes scientific domains.
-    </p>
+    <div class="hero-image-placeholder" id="about">
+      Diagram Placeholder
+    </div>
 
     <div class="hero-cta">
       <a href="https://github.com" class="btn btn-primary" target="_blank" rel="noopener">
