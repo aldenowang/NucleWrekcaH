@@ -519,6 +519,22 @@
     color: var(--accent2);
     letter-spacing: 0.06em;
     margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .citation-meta::after {
+    content: "↗";
+    font-weight: 700;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .citation:hover .citation-meta::after {
+    opacity: 1;
+    transform: translate(2px, -2px);
   }
 
   .citation-title {
@@ -772,19 +788,19 @@
   <h2>Research Foundations</h2>
   <div class="citations">
 
-    <a class="citation" href="#" onclick="return false;">
-      <div class="citation-meta">Roy et al. · 2026</div>
+    <a class="citation" href="https://arxiv.org/abs/2603.22525" target="_blank" rel="noopener">
+      <div class="citation-meta">Roy et al. · 2026 · arXiv:2603.22525</div>
       <div class="citation-title">Adversarial Vulnerability Discovery in Neural Operator Surrogates for Nuclear Physics Simulation</div>
       <div class="citation-authors">Roy, A. et al. (2026)</div>
     </a>
 
-    <a class="citation" href="#" onclick="return false;">
+    <a class="citation" href="https://www.sciencedirect.com/science/article/pii/S1540748918301615" target="_blank" rel="noopener">
       <div class="citation-meta">Sobhani et al. · 2019</div>
-      <div class="citation-title">Adversarial Examples in Deep Learning: Characterization and Divergence</div>
-      <div class="citation-authors">Sobhani, P. et al. (2019)</div>
+      <div class="citation-title">Modulation of Heat Transfer for Extended Flame Stabilization in Porous Media Burners via Topology Gradation</div>
+      <div class="citation-authors">Sobhani, S., Mohaddes, D., Boigne, E., Muhunthan, P., & Ihme, M. (2019). Proceedings of the Combustion Institute, 37, 5697–5704.</div>
     </a>
 
-    <a class="citation" href="#" onclick="return false;">
+    <a class="citation" href="https://www.wiley.com/en-us/Nuclear+Reactor+Analysis-p-9780471223634" target="_blank" rel="noopener">
       <div class="citation-meta">Duderstadt & Hamilton · 1976</div>
       <div class="citation-title">Nuclear Reactor Analysis</div>
       <div class="citation-authors">Duderstadt, J. J. & Hamilton, L. J. (1976). John Wiley & Sons.</div>
