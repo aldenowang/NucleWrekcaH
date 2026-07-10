@@ -30,14 +30,19 @@
   <p>A "successful attack" against a surrogate model is currently defined in purely statistical terms — a spike in prediction error relative to the ground-truth solver. That definition is useful for benchmarking, but it says nothing about whether the error actually matters. This goal reclassifies surrogate-model failure in terms of real-world consequence: instead of asking "how large is the error," we ask "would this error, if it occurred in a real coolant channel, push the system past a limit that operators actually care about."</p>
 
   <h3>Failure Criteria</h3>
-  <div class="formula-box">
-    <p>We define a physical failure event as either of the following being violated:</p>
-    <ul>
-      <li>the pressure on the pipe wall exceeding a maximum allowable pressure, <span class="math-inline">$P_{\max} \approx 9.39\text{ MPa}$</span>, derived from ASME pipe parameters via Barlow's formula; or</li>
-      <li>the pipe wall temperature exceeding 800°C, the maximum service temperature of 316H stainless steel:</li>
-    </ul>
+  <p class="criteria-intro">We define a physical failure event as either of the following being violated:</p>
+  <div class="criteria-grid">
+    <div class="criteria-card">
+      <div class="criteria-label">Pressure Limit</div>
+      <div class="criteria-value">$P_{\max} \approx 9.39\ \text{MPa}$</div>
+      <p class="criteria-sub">Maximum allowable pipe-wall pressure, derived from ASME pipe parameters via Barlow's formula.</p>
+    </div>
+    <div class="criteria-card">
+      <div class="criteria-label">Temperature Limit</div>
+      <div class="criteria-value">$T_{\text{wall}}(z) < 800^{\circ}\text{C}$</div>
+      <p class="criteria-sub">Maximum service temperature of 316H stainless steel, at any axial position <em>z</em>.</p>
+    </div>
   </div>
-  <div class="math-block">$$T_{\text{wall}}(z) < 800^{\circ}\text{C}$$</div>
 
   <h3>Deriving the Wall Temperature</h3>
   <p>The wall temperature at any axial position <em>z</em> along the channel follows from Newton's law of cooling, which relates the wall temperature to the local fluid temperature and the local heat flux through the convective coefficient <em>h</em>:</p>
