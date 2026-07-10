@@ -29,8 +29,22 @@
 
   <p>A "successful attack" against a surrogate model is conventionally defined by a spike in prediction error, a purely statistical measure with no bearing on physical consequence. This goal reclassifies that failure in terms of real-world impact, requiring an attack to be a stealthy, plausible perturbation that pushes the system's true or predicted state past a safety-relevant limit.</p>
 
-  <h3>Failure Criteria</h3>
-  <p class="criteria-intro">A physical failure event is defined as a violation of either of the following limits:</p>
+  <h3>Successful Attack Constraints</h3>
+  <p>A valid attack must satisfy two constraints that keep the perturbation stealthy, plus a third that determines whether it actually causes damage.</p>
+
+  <p><strong>1. Sparsity.</strong> Of the model's 102 input features, only a small number, <em>n</em>, may be perturbed. The fraction perturbed must stay below a chosen sparsity threshold <em>τ</em>:</p>
+  <div class="math-block">$$\dfrac{n}{102} < \tau$$</div>
+
+  <p><strong>2. Plausibility.</strong> Each perturbed input <span class="math-inline">$\tilde{b}_i$</span> must remain within one standard deviation of that input's average value in the training set. Standardizing against the training-set mean <span class="math-inline">$\mu_i$</span> and standard deviation <span class="math-inline">$\sigma_i$</span>:</p>
+  <div class="math-block">$$\dfrac{\tilde{b}_i - \mu_i}{\sigma_i} \in [-1,\ 1] \quad \text{for every perturbed input } i$$</div>
+
+  <p><strong>3. Damage.</strong> Let <em>y</em> denote the true value of a monitored quantity (pressure or wall temperature), <span class="math-inline">$\hat{y}$</span> the surrogate model's predicted value for that quantity, and <em>L</em> the corresponding safety limit, defined next in the Damage Criteria below. An attack causes damage if it produces either of the following:</p>
+  <div class="math-block">$$\text{unsafe}_{\text{missed}}: \quad y > L \ \text{ and } \ \hat{y} < L$$</div>
+  <div class="math-block">$$\text{unsafe}_{\text{false-alarm}}: \quad y \le L \ \text{ and } \ \hat{y} > L$$</div>
+  <p><em>unsafe<sub>missed</sub></em> is a true failure that the surrogate model fails to flag; <em>unsafe<sub>false-alarm</sub></em> is a false failure the model reports when the true state is safe. Both cases apply independently to pressure and to wall temperature, using the corresponding limit <em>L</em> below.</p>
+
+  <h3>Damage Criteria</h3>
+  <p class="criteria-intro">The safety limit <em>L</em> referenced in the damage condition above takes one of the following two forms, depending on which quantity is being monitored:</p>
   <div class="criteria-grid">
     <div class="criteria-card">
       <div class="criteria-label">Pressure Limit</div>
@@ -43,20 +57,6 @@
       <p class="criteria-sub">Maximum service temperature of 316H stainless steel, at any axial position <em>z</em>.</p>
     </div>
   </div>
-
-  <h3>Attack Constraints</h3>
-  <p>A valid attack must satisfy two constraints that keep the perturbation stealthy, plus a third that determines whether it actually causes damage.</p>
-
-  <p><strong>1. Sparsity.</strong> Of the model's 102 input features, only a small number, <em>n</em>, may be perturbed. The fraction perturbed must stay below a chosen sparsity threshold <em>τ</em>:</p>
-  <div class="math-block">$$\dfrac{n}{102} < \tau$$</div>
-
-  <p><strong>2. Plausibility.</strong> Each perturbed input <span class="math-inline">$\tilde{b}_i$</span> must remain within one standard deviation of that input's average value in the training set. Standardizing against the training-set mean <span class="math-inline">$\mu_i$</span> and standard deviation <span class="math-inline">$\sigma_i$</span>:</p>
-  <div class="math-block">$$\dfrac{\tilde{b}_i - \mu_i}{\sigma_i} \in [-1,\ 1] \quad \text{for every perturbed input } i$$</div>
-
-  <p><strong>3. Damage.</strong> Let <em>y</em> denote the true value of a monitored quantity (pressure or wall temperature), <span class="math-inline">$\hat{y}$</span> the surrogate model's predicted value for that quantity, and <em>L</em> the corresponding limit from above (<span class="math-inline">$P_{\max}$</span> or 800°C). An attack causes damage if it produces either of the following:</p>
-  <div class="math-block">$$\text{unsafe}_{\text{missed}}: \quad y > L \ \text{ and } \ \hat{y} < L$$</div>
-  <div class="math-block">$$\text{unsafe}_{\text{false-alarm}}: \quad y \le L \ \text{ and } \ \hat{y} > L$$</div>
-  <p><em>unsafe<sub>missed</sub></em> is a true failure that the surrogate model fails to flag; <em>unsafe<sub>false-alarm</sub></em> is a false failure the model reports when the true state is safe. Both cases apply independently to pressure and to wall temperature.</p>
 
   <h3>Deriving the Wall Temperature</h3>
   <p>The wall temperature at axial position <em>z</em> follows from Newton's law of cooling, relating it to the local fluid temperature and the local heat flux through the convective coefficient <em>h</em>:</p>
