@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Grounding Model Failure in Physical Consequence · NucleWrekcaH</title>
-<link rel="stylesheet" href="../styles.css?v=2">
+<link rel="stylesheet" href="../styles.css?v=3">
 <link rel="stylesheet" href="../vendor/katex/dist/katex.min.css">
 </head>
 <body>
@@ -80,7 +80,41 @@
   <p>The first term represents the bulk fluid temperature rise from absorbed heat, which grows monotonically with <em>z</em>. The second represents the additional temperature rise across the wall's boundary layer, which tracks the shape of the local heat flux.</p>
 
   <h3>Variable Definitions</h3>
-  <img class="table-image" src="assets/goal-1-variable-table.png" alt="Table of variable definitions: symbol, definition, and role for each quantity used in the wall-temperature derivation.">
+  <div class="var-table-wrap">
+    <table class="var-table">
+      <colgroup>
+        <col>
+        <col>
+        <col>
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Definition</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>$T_{\text{wall}}(z)$</td><td>Pipe wall temperature at axial position <em>z</em></td><td>Derived quantity</td></tr>
+        <tr><td>$T_{\text{fluid}}(z)$</td><td>Bulk coolant temperature at axial position <em>z</em></td><td>Derived quantity</td></tr>
+        <tr><td>$T_{\text{in}}$</td><td>Coolant temperature as it enters the channel</td><td>Model input</td></tr>
+        <tr><td>$v$</td><td>Coolant velocity</td><td>Model output</td></tr>
+        <tr><td>$q''(z)$</td><td>Local heat flux at axial position <em>z</em></td><td>Derived quantity</td></tr>
+        <tr><td>$q_{\max}$</td><td>Maximum heat flux, occurring at <em>z</em> = <em>H</em>/2</td><td>Model parameter</td></tr>
+        <tr><td>$z$</td><td>Axial position along the pipe</td><td>Independent variable</td></tr>
+        <tr><td>$H$</td><td>Length of the pipe</td><td>Model parameter</td></tr>
+        <tr><td>$P_w$</td><td>Wetted perimeter, the perimeter of the channel's cross section</td><td>Model parameter</td></tr>
+        <tr><td>$A_{\text{cross}}$</td><td>Cross-sectional area of the channel</td><td>Model parameter</td></tr>
+        <tr><td>$D_h$</td><td>Hydraulic diameter of the channel</td><td>Model parameter</td></tr>
+        <tr><td>$h$</td><td>Convective heat transfer coefficient</td><td>Derived quantity</td></tr>
+        <tr><td>$\rho$</td><td>Coolant density</td><td>Fluid property</td></tr>
+        <tr><td>$\mu$</td><td>Coolant dynamic viscosity</td><td>Fluid property</td></tr>
+        <tr><td>$c_p$</td><td>Coolant specific heat capacity</td><td>Fluid property</td></tr>
+        <tr><td>$k$</td><td>Coolant thermal conductivity</td><td>Fluid property</td></tr>
+        <tr><td>$P_{\max}$</td><td>Maximum allowable pipe wall pressure</td><td>Safety limit</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <h3>Why This Matters</h3>
   <p>An adversarial input that merely inflates a surrogate model's mean-squared error is a benchmark curiosity. An adversarial input that, once mapped through the pressure limit and this wall-temperature model, pushes <em>P</em> above <em>P</em><sub>max</sub> or <em>T</em><sub>wall</sub>(<em>z</em>) above 800°C for any <em>z</em> is a safety-relevant finding: it identifies a region of the input space where trusting the surrogate model would mean missing a real physical failure mode.</p>
