@@ -492,6 +492,56 @@
     margin-top: 0.05rem;
   }
 
+  /* ── Authors ── */
+  #authors {
+    background: #f4f2ec;
+  }
+
+  .authors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+  }
+
+  .author-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 1.75rem;
+    text-align: center;
+    transition: box-shadow 0.2s;
+  }
+
+  .author-card:hover {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+
+  .author-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    margin: 0 auto 1.1rem;
+    display: block;
+    background: var(--bg2);
+  }
+
+  .author-name {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.9rem;
+  }
+
+  .author-bio {
+    text-align: left;
+    color: var(--ink-dim);
+    font-size: 0.86rem;
+    line-height: 1.65;
+  }
+
   /* ── Research ── */
   .citations {
     display: flex;
@@ -583,6 +633,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#what-it-does">System</a></li>
     <li><a href="#results">Results</a></li>
+    <li><a href="#authors">Authors</a></li>
     <li><a href="#research">Research</a></li>
   </ul>
 </nav>
@@ -777,6 +828,39 @@
         <div class="tech-name">Docker</div>
         <span class="tech-sub">Reproducible eval environments</span>
       </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT THE AUTHORS -->
+<section id="authors">
+  <div class="section-label">Team</div>
+  <h2>About the Authors</h2>
+  <div class="authors-grid">
+
+    <div class="author-card">
+      <img class="author-photo" src="images/author-brumley.png" alt="Professor David Brumley">
+      <div class="author-name">Professor David Brumley</div>
+      <p class="author-bio">Dr. David Brumley is Chief AI & Science Officer at Bugcrowd and a full professor at Carnegie Mellon University, where he has spent decades advancing the state of offensive security. He has been called the "Nick Saban of Hacking" and is the founder of picoCTF, the world's largest cybersecurity competition. He also advises PPP/MMM, one of the most successful competitive hacking teams globally, and is a venture partner at Rain Capital.</p>
+    </div>
+
+    <div class="author-card">
+      <img class="author-photo" src="images/author-bao.png" alt="Professor Tiffany Bao">
+      <div class="author-name">Professor Tiffany Bao</div>
+      <p class="author-bio">Bio coming soon.</p>
+    </div>
+
+    <div class="author-card">
+      <img class="author-photo" src="images/author-wang.png" alt="Alden Wang">
+      <div class="author-name">Alden Wang</div>
+      <p class="author-bio">Bio coming soon.</p>
+    </div>
+
+    <div class="author-card">
+      <img class="author-photo" src="images/author-lee.png" alt="Seunghyun Lee">
+      <div class="author-name">Seunghyun Lee</div>
+      <p class="author-bio">Seunghyun Lee (a.k.a. Xion) is a Ph.D. student at Carnegie Mellon University and a member of PPP and MMM. He was the #1 Chrome VRP researcher in 2024 and #1 in 2025, with 20+ CVEs in V8 alone, including bugs exploited at Pwn2Own Vancouver 2024, TyphoonPWN, and Google's v8CTF. He has won DEFCON CTF three times as part of MMM, and holds the coveted DEF CON black badge, the highest honor awarded by the conference.</p>
     </div>
 
   </div>
