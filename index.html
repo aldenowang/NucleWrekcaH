@@ -75,7 +75,6 @@
         <li>Separable ODEs</li>
         <li>1D Heat Conduction w/ Internal Source</li>
         <li>Neutron Diffusion</li>
-        <li>Navier–Stokes (FNO) <span class="tag">coming</span></li>
       </ul>
     </div>
 
@@ -95,8 +94,8 @@
     <div class="card">
       <div class="card-icon">III</div>
       <div class="card-num">MODULE 03</div>
-      <h3>Adversarial Evaluation of Neural Operators</h3>
-      <p>The agent targets Fourier Neural Operators and similar surrogate models, searching the input space for regions of high prediction error — inputs where the ML model's physics approximation breaks down and cannot be trusted for downstream inference or safety analysis.</p>
+      <h3>Adversarial Evaluation of Surrogate Models</h3>
+      <p>The agent targets neural surrogate models of reactor systems, searching the input space for regions of high prediction error — inputs where the model's physics approximation breaks down and cannot be trusted for downstream inference or safety analysis.</p>
     </div>
 
   </div>
@@ -138,7 +137,7 @@
   <div class="results-header">
     <div>
       <h2 style="margin-bottom:0.5rem;">Evaluation Results</h2>
-      <p style="color:var(--ink-dim);font-size:0.9rem;max-width:500px;">Adversarial agent success rate across physics simulation harnesses. A "success" means the agent identified a high-error input region in the target neural operator.</p>
+      <p style="color:var(--ink-dim);font-size:0.9rem;max-width:500px;">Adversarial agent success rate across physics simulation harnesses. A "success" means the agent identified a high-error input region in the target surrogate model.</p>
     </div>
     <div class="stat-block">
       <div class="big-stat" id="counter-display">100%</div>
@@ -188,20 +187,6 @@
       <div class="sim-pct">100%</div>
     </div>
 
-    <div class="sim-row sim-coming">
-      <div class="sim-info">
-        <div class="sim-name">Fourier Neural Operator · Navier–Stokes <span class="tag">in progress</span></div>
-        <div class="progress-track"><div class="progress-fill" style="--target-width: 0%"></div></div>
-      </div>
-      <div class="sim-pct" style="color:var(--ink-faint);">—</div>
-    </div>
-
-  </div>
-
-  <div class="baseline-note">
-    <p>
-      The target FNO model achieves a baseline test error of <strong>8.3%</strong> on the Navier–Stokes benchmark (Li et al., 2021). NucleWrekcaH's adversarial agent is designed to systematically find inputs that push this error significantly higher — demonstrating that published benchmark accuracy does not imply robustness under adversarial distribution shift.
-    </p>
   </div>
 </section>
 
@@ -231,7 +216,7 @@
       <span class="tech-icon">T</span>
       <div>
         <div class="tech-name">PyTorch</div>
-        <span class="tech-sub">Neural operator models</span>
+        <span class="tech-sub">Surrogate model training</span>
       </div>
     </div>
 
@@ -301,12 +286,6 @@
       <div class="citation-meta">Duderstadt & Hamilton · 1976</div>
       <div class="citation-title">Nuclear Reactor Analysis</div>
       <div class="citation-authors">Duderstadt, J. J. & Hamilton, L. J. (1976). John Wiley & Sons.</div>
-    </a>
-
-    <a class="citation" href="https://arxiv.org/abs/2010.08895" target="_blank" rel="noopener">
-      <div class="citation-meta">Li et al. · 2021 · arXiv:2010.08895</div>
-      <div class="citation-title">Fourier Neural Operator for Parametric Partial Differential Equations</div>
-      <div class="citation-authors">Li, Z., Kovachki, N., Azizzadenesheli, K., Liu, B., Bhattacharya, K., Stuart, A., & Anandkumar, A. (2021). ICLR.</div>
     </a>
 
   </div>
