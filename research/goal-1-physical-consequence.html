@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grounding Model Failure in Physical Consequence — NucleWrekcaH</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="../index.html">NucleWrekcaH</a>
+  <ul class="nav-links">
+    <li><a href="../index.html#what-it-does">System</a></li>
+    <li><a href="../index.html#goals">Research</a></li>
+    <li><a href="../index.html#results">Results</a></li>
+    <li><a href="../index.html#authors">Authors</a></li>
+    <li><a href="../index.html#research">References</a></li>
+  </ul>
+</nav>
+
+<section class="detail-section">
+  <a class="back-link" href="../index.html#goals">Back to Research Goals</a>
+
+  <div class="section-label">Research Goal 01</div>
+  <h2>Grounding Model Failure in Physical Consequence</h2>
+
+  <p>A "successful attack" against a surrogate model is currently defined in purely statistical terms — a spike in prediction error relative to the ground-truth solver. That definition is useful for benchmarking, but it says nothing about whether the error actually matters. This goal reclassifies surrogate-model failure in terms of real-world consequence: instead of asking "how large is the error," we ask "would this error, if it occurred in a real coolant channel, push the system past a limit that operators actually care about."</p>
+
+  <h3>Failure Criteria</h3>
+  <div class="formula-box">
+    <p>We define a physical failure event as either of the following being violated:</p>
+    <ul>
+      <li>the pressure on the pipe wall exceeding a maximum allowable pressure, <em>P</em><sub>max</sub> ≈ 9.39 MPa, derived from ASME pipe parameters via Barlow's formula; or</li>
+      <li>the pipe wall temperature exceeding 800°C, the maximum service temperature of 316H stainless steel:</li>
+    </ul>
+    <span class="eq">T<sub>wall</sub>(z) &lt; 800°C</span>
+  </div>
+
+  <h3>Deriving the Wall Temperature</h3>
+  <p>The wall temperature at any axial position <em>z</em> along the channel follows from Newton's law of cooling, which relates the wall temperature to the local fluid temperature and the local heat flux through the convective coefficient <em>h</em>:</p>
+  <div class="formula-box">
+    <span class="eq">T<sub>wall</sub>(z) = T<sub>fluid</sub>(z) + q″(z) / h(z)</span>
+  </div>
+
+  <p>To use this, we need <em>T</em><sub>fluid</sub>(<em>z</em>) and <em>h</em>(<em>z</em>) individually. <em>T</em><sub>fluid</sub>(<em>z</em>) comes from a conservation-of-energy balance on the coolant: as fluid moves up the channel, it absorbs heat through the wetted perimeter <em>P</em><sub>w</sub> from the local heat flux <em>q″</em>(<em>z</em>), which is modeled with the standard cosine-shaped axial power profile used in reactor cores,</p>
+  <div class="formula-box">
+    <span class="eq">q″(z) = q<sub>max</sub>·sin(πz/H)</span>
+  </div>
+  <p>Integrating the heat absorbed from the inlet up to position <em>z</em> and dividing by the coolant's mass flow rate (<em>ρ·v·A</em><sub>cross</sub>) gives the fluid temperature rise, and substituting <em>q″</em>(<em>z</em>) back into Newton's law of cooling for the second term yields the full closed-form wall-temperature profile:</p>
+  <div class="formula-box">
+    <span class="eq" style="white-space:normal;">T<sub>wall</sub>(z) = T<sub>in</sub> + [P<sub>w</sub>·q<sub>max</sub> / (ρ·v·A<sub>cross</sub>)] · ∫<sub>0</sub><sup>z</sup> sin(πz′/H) dz′ &nbsp;+&nbsp; q<sub>max</sub>·sin(πz/H) / h</span>
+    <p style="margin-top:0.9rem;">The integral evaluates in closed form to (H/π)·[1 − cos(πz/H)], giving:</p>
+    <span class="eq" style="white-space:normal;">T<sub>wall</sub>(z) = T<sub>in</sub> + [P<sub>w</sub>·q<sub>max</sub>·H / (π·ρ·v·A<sub>cross</sub>)] · [1 − cos(πz/H)] &nbsp;+&nbsp; q<sub>max</sub>·sin(πz/H) / h</span>
+  </div>
+
+  <p>The first term is the bulk fluid temperature rise from absorbing heat along the channel — it grows monotonically with <em>z</em>. The second term is the extra temperature jump across the boundary layer at the wall itself, governed by how effectively the coolant convects heat away, and it tracks the local heat flux shape directly.</p>
+
+  <h3>The Convective Coefficient</h3>
+  <p>The convective coefficient <em>h</em> is not a constant — it depends on the flow regime and the coolant's thermal properties. We compute it with the Dittus–Boelter correlation, the standard empirical closure for turbulent forced convection in a pipe:</p>
+  <div class="formula-box">
+    <span class="eq">h = 0.023 · (ρ·v·D<sub>h</sub>/μ)<sup>0.8</sup> · (c<sub>p</sub>·μ/k)<sup>0.4</sup> · (k/D<sub>h</sub>)</span>
+    <p style="margin-top:0.9rem;">Here the first bracketed term is the Reynolds number (inertial vs. viscous forces), raised to the 0.8 power, and the second bracketed term is the Prandtl number (momentum vs. thermal diffusivity), raised to the 0.4 power — together the Nusselt-number correlation Nu = 0.023·Re<sup>0.8</sup>·Pr<sup>0.4</sup>, converted to a dimensional coefficient by multiplying by k/D<sub>h</sub>.</p>
+  </div>
+
+  <p>Variable definitions: <em>T</em><sub>in</sub> is the coolant inlet temperature, <em>P</em><sub>w</sub> the wetted perimeter, <em>A</em><sub>cross</sub> the flow cross-sectional area, <em>D</em><sub>h</sub> the hydraulic diameter, <em>H</em> the heated length, and ρ, <em>v</em>, μ, <em>c</em><sub>p</sub>, <em>k</em> are the coolant's density, velocity, viscosity, specific heat, and thermal conductivity, respectively.</p>
+
+  <h3>Why This Matters</h3>
+  <p>An adversarial input that merely inflates a surrogate model's mean-squared error is a benchmark curiosity. An adversarial input that, once mapped through the pressure limit and this wall-temperature model, pushes <em>P</em> above <em>P</em><sub>max</sub> or <em>T</em><sub>wall</sub>(<em>z</em>) above 800°C for any <em>z</em> is a safety-relevant finding — it identifies a region of the input space where trusting the surrogate model would mean missing a real physical failure mode.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>NucleWrekcaH &nbsp;·&nbsp; Adversarial AI Research &nbsp;·&nbsp;
+    <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+  </p>
+</footer>
+
+</body>
+</html>

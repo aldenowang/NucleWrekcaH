@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black-Box Attack Discovery — NucleWrekcaH</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="../index.html">NucleWrekcaH</a>
+  <ul class="nav-links">
+    <li><a href="../index.html#what-it-does">System</a></li>
+    <li><a href="../index.html#goals">Research</a></li>
+    <li><a href="../index.html#results">Results</a></li>
+    <li><a href="../index.html#authors">Authors</a></li>
+    <li><a href="../index.html#research">References</a></li>
+  </ul>
+</nav>
+
+<section class="detail-section">
+  <a class="back-link" href="../index.html#goals">Back to Research Goals</a>
+
+  <div class="section-label">Research Goal 02</div>
+  <h2>Black-Box Attack Discovery</h2>
+
+  <p>Most adversarial machine learning research assumes white-box access — the attacker can see the model's architecture, weights, and gradients, and can use them to directly compute a perturbation that maximizes error (e.g. via gradient ascent). That assumption almost never holds for a real surrogate model deployed inside plant instrumentation: an attacker, or an auditor probing for weaknesses, typically only gets to submit an input and observe an output.</p>
+
+  <p>This goal asks whether an LLM agent can still succeed under that much harder constraint: given only black-box query access to a surrogate model — an input vector in, a prediction out, nothing else — can it construct a sequence of queries that reliably surfaces a high-error region, without ever seeing a gradient?</p>
+
+  <h3>Why This Is Hard</h3>
+  <p>Without gradients, the agent cannot follow the direction of steepest error ascent analytically. It has to build an implicit model of where the surrogate is weak using indirect evidence: physical intuition about where a neural operator is likely to have been under-trained (distribution edges, discontinuities, rare parameter combinations), sequential experimentation (propose an input, observe the output, refine), and reasoning about the ground-truth physics well enough to recognize when a surrogate's prediction has quietly diverged from it.</p>
+
+  <h3>Approach</h3>
+  <p>Our ReAct-style agent (see <a href="../index.html#what-it-does">System Overview</a>) operates entirely through the same input/output tool interface a black-box attacker would have: it forms a hypothesis about a weak region, submits a probe, observes the resulting prediction error against the ground-truth physics solver, and updates its strategy — iterating reason → act → observe across each simulator.</p>
+
+  <div class="status-note">
+    Quantitative black-box success criteria and comparison against white-box baselines are in progress — this page will be updated with the full methodology and results.
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>NucleWrekcaH &nbsp;·&nbsp; Adversarial AI Research &nbsp;·&nbsp;
+    <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+  </p>
+</footer>
+
+</body>
+</html>

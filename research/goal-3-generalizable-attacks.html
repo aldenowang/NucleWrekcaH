@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generalizable Attack Strategies — NucleWrekcaH</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="../index.html">NucleWrekcaH</a>
+  <ul class="nav-links">
+    <li><a href="../index.html#what-it-does">System</a></li>
+    <li><a href="../index.html#goals">Research</a></li>
+    <li><a href="../index.html#results">Results</a></li>
+    <li><a href="../index.html#authors">Authors</a></li>
+    <li><a href="../index.html#research">References</a></li>
+  </ul>
+</nav>
+
+<section class="detail-section">
+  <a class="back-link" href="../index.html#goals">Back to Research Goals</a>
+
+  <div class="section-label">Research Goal 03</div>
+  <h2>Generalizable Attack Strategies</h2>
+
+  <p>Finding one adversarial input that breaks one surrogate model is a demonstration. Finding a formula or strategy that reliably reproduces that failure — across different initial conditions, and ideally across different simulators entirely — is a result. This goal pushes past one-off adversarial examples toward a general characterization of <em>why</em> a class of surrogate models fails, not just a single instance of it failing.</p>
+
+  <h3>What "Generalizable" Means Here</h3>
+  <p>A one-off attack answers: "does this specific input break this specific model?" A generalizable attack strategy answers a stronger question: "given the structure of this class of problem (e.g. a sharp discontinuity, a boundary-layer effect, a rare combination of physical parameters), can the agent derive a rule for constructing inputs that break any model trained on this class?" The latter is far more useful — it tells you something about the surrogate modeling approach itself, not just about one trained checkpoint.</p>
+
+  <h3>Approach</h3>
+  <p>After the agent identifies individual high-error inputs (Goal 2), we test whether it can abstract from those examples to a general hypothesis — for instance, a parametric family of inputs, or a rule tied to the underlying physics (e.g. "error spikes whenever the input places the system near a phase boundary the training distribution under-sampled") — and then validate that hypothesis by generating new attacks from the rule and confirming they transfer across simulators and across independently trained surrogate models.</p>
+
+  <div class="status-note">
+    The formal generalization criteria and cross-simulator transfer results are in progress — this page will be updated with the full methodology and results.
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>NucleWrekcaH &nbsp;·&nbsp; Adversarial AI Research &nbsp;·&nbsp;
+    <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+  </p>
+</footer>
+
+</body>
+</html>
