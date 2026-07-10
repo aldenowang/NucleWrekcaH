@@ -419,18 +419,34 @@ hr.divider + section {
   line-height: 1.8;
 }
 
-.formula-box .eq {
-  display: block;
-  font-family: var(--serif);
-  font-style: italic;
-  color: var(--ink);
-  background: var(--bg);
-  border: 1px solid var(--line-soft);
-  padding: 0.55rem 0.9rem;
-  border-radius: 2px;
+.math-block {
+  margin: 1rem 0;
+  padding: 1.75rem 1.5rem;
+  background: #14161c;
+  border-radius: 5px;
   overflow-x: auto;
-  white-space: nowrap;
-  font-size: 0.92rem;
+  text-align: center;
+}
+
+.math-block:first-child {
+  margin-top: 0;
+}
+
+.math-block:last-child {
+  margin-bottom: 0;
+}
+
+.math-block .katex {
+  color: #f4f2ec;
+  font-size: 1.15em;
+}
+
+.math-block .katex-display {
+  margin: 0;
+}
+
+.math-inline .katex {
+  font-size: 1.05em;
 }
 
 /* ── Detail (research goal) pages ── */
