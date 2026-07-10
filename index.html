@@ -372,6 +372,44 @@
     line-height: 1.7;
   }
 
+  .goal-card .formula-box {
+    margin-top: 1.25rem;
+    padding: 1.1rem 1.35rem;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent2);
+    border-radius: 2px;
+    background: var(--bg2);
+  }
+
+  .goal-card .formula-box p {
+    margin-bottom: 0.75rem;
+  }
+
+  .goal-card .formula-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  .goal-card .formula-box ul {
+    margin: 0 0 0.9rem 1.1rem;
+    color: var(--ink-dim);
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+
+  .goal-card .formula-box .eq {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--line-soft);
+    padding: 0.55rem 0.9rem;
+    border-radius: 2px;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 0.92rem;
+  }
+
   /* ── Results ── */
   #results {
     background: #f4f2ec;
@@ -765,6 +803,21 @@
       <div class="goal-num">01</div>
       <h3>Grounding Model Failure in Physical Consequence</h3>
       <p>A "successful attack" against a surrogate model is currently defined in purely statistical terms — a spike in prediction error. We aim to reclassify that error in terms of real-world consequence: translating a surrogate model's failure mode into an estimate of the physical damage or safety-margin violation it would represent on an actual nuclear reactor.</p>
+
+      <div class="formula-box">
+        <p>Concretely, we define a physical failure event as either of the following being violated:</p>
+        <ul>
+          <li>the pressure on the pipe wall exceeding a maximum allowable pressure, <em>P</em><sub>max</sub> ≈ 9.39 MPa, derived from ASME pipe parameters via Barlow's formula; or</li>
+          <li>the pipe wall temperature exceeding 800°C, the maximum service temperature of 316H stainless steel: <em>T</em><sub>wall</sub>(<em>z</em>) &lt; 800°C.</li>
+        </ul>
+        <p>The wall temperature follows from Newton's law of cooling,</p>
+        <span class="eq">T<sub>wall</sub>(z) = T<sub>fluid</sub>(z) + q″(z) / h(z)</span>
+        <p style="margin-top:0.75rem;">Combining this with an energy balance on the coolant and a cosine-shaped axial heat flux, q″(z) = q<sub>max</sub>·sin(πz/H), gives the closed-form wall-temperature profile:</p>
+        <span class="eq" style="white-space:normal;">T<sub>wall</sub>(z) = T<sub>in</sub> + [P<sub>w</sub>·q<sub>max</sub> / (ρ·v·A<sub>cross</sub>)] · ∫<sub>0</sub><sup>z</sup> sin(πz′/H) dz′ &nbsp;+&nbsp; q<sub>max</sub>·sin(πz/H) / h</span>
+        <p style="margin-top:0.75rem;">where the convective coefficient <em>h</em> is given by the Dittus–Boelter correlation:</p>
+        <span class="eq">h = 0.023 · (ρ·v·D<sub>h</sub>/μ)<sup>0.8</sup> · (c<sub>p</sub>·μ/k)<sup>0.4</sup> · (k/D<sub>h</sub>)</span>
+        <p style="margin-top:0.75rem;">Here <em>T</em><sub>in</sub> is the coolant inlet temperature, <em>P</em><sub>w</sub> the wetted perimeter, <em>A</em><sub>cross</sub> the flow cross-sectional area, <em>D</em><sub>h</sub> the hydraulic diameter, <em>H</em> the heated length, and ρ, <em>v</em>, μ, <em>c</em><sub>p</sub>, <em>k</em> the coolant's density, velocity, viscosity, specific heat, and thermal conductivity, respectively.</p>
+      </div>
     </div>
 
     <div class="goal-card">
