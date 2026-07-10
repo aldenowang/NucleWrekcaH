@@ -54,11 +54,13 @@
     <div class="criteria-card">
       <div class="criteria-label">Temperature Limit</div>
       <div class="criteria-value">$T_{\text{wall}}(z) < 800^{\circ}\text{C}$</div>
-      <p class="criteria-sub">Maximum service temperature of 316H stainless steel, at any axial position <em>z</em>.</p>
+      <p class="criteria-sub">Absolute worst-case service temperature of 316H stainless steel, at any axial position <em>z</em>.</p>
     </div>
   </div>
 
   <p>The allowable stress <em>S</em> is temperature-dependent: it is read from the 1-hour creep-rupture lookup tables in an <a href="https://inldigitallibrary.inl.gov/content/uploads/50/2026/04/Sort_57445.pdf" target="_blank" rel="noopener">Idaho National Laboratory study</a>, at whatever wall temperature is being evaluated. We always use the 1-hour value specifically because it is conservative, the shortest and most restrictive duration in the table, and an unsafe condition such as a false alarm will not remain undetected for anywhere near that long. With a wall thickness <em>t</em> = 0.007112 m and outer diameter <em>D</em> = 1/6 m, for normal pressurized water reactor heat exchanger temperatures the pressure limit is approximately 9.39 MPa, and decreases as temperature increases.</p>
+
+  <p>800°C is the absolute worst-case limit for 316H, the point beyond which failure is assumed. To stay fully conservative, though, we treat the wall temperature as unsafe well before that: at or below <strong>650°C</strong>, per <a href="https://www.sciencedirect.com/science/article/pii/S0921509326003916" target="_blank" rel="noopener">this study</a>.</p>
 
   <h3>Deriving the Wall Temperature</h3>
   <p>The wall temperature at axial position <em>z</em> follows from Newton's law of cooling, relating it to the local fluid temperature and the local heat flux through the convective coefficient <em>h</em>:</p>
