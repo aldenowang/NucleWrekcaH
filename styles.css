@@ -473,13 +473,13 @@ hr.divider + section {
 }
 
 .criteria-label {
-  font-family: var(--sans);
-  font-size: 0.8rem;
+  font-family: var(--serif);
+  font-size: 1.3rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
   color: var(--accent2);
-  margin-bottom: 0.9rem;
+  margin-bottom: 1.1rem;
 }
 
 .criteria-value {
@@ -496,6 +496,49 @@ hr.divider + section {
   color: var(--ink-dim);
   font-size: 0.88rem;
   line-height: 1.55;
+}
+
+/* ── Variable definition table ── */
+.var-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0 1.75rem;
+  font-size: 0.88rem;
+}
+
+.var-table th,
+.var-table td {
+  text-align: left;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.var-table th {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent2);
+  border-bottom: 2px solid var(--accent);
+}
+
+.var-table td:first-child {
+  white-space: nowrap;
+  width: 1%;
+}
+
+.var-table td:last-child {
+  color: var(--ink-dim);
+}
+
+.var-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 640px) {
+  .var-table { font-size: 0.82rem; }
+  .var-table th, .var-table td { padding: 0.5rem 0.6rem; }
 }
 
 /* ── Detail (research goal) pages ── */
