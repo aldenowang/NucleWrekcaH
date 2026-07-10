@@ -504,61 +504,15 @@ hr.divider + section {
   line-height: 1.55;
 }
 
-/* ── Variable definition table ── */
-.var-table-wrap {
+/* ── Variable definition table (image) ── */
+.table-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
   margin: 1.25rem 0 1.75rem;
-  overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: 4px;
-}
-
-.var-table {
-  width: 100%;
-  min-width: 600px;
-  table-layout: fixed;
-  border-collapse: collapse;
-  font-size: 0.92rem;
-}
-
-.var-table col:nth-child(1) { width: 18%; }
-.var-table col:nth-child(2) { width: 54%; }
-.var-table col:nth-child(3) { width: 28%; }
-
-.var-table th,
-.var-table td {
-  text-align: left;
-  vertical-align: middle;
-  padding: 1.05rem 1.5rem;
-  border-bottom: 1px solid var(--line);
-  overflow-wrap: break-word;
-}
-
-.var-table th {
-  font-family: var(--sans);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent2);
-  background: #f4efe6;
-  border-bottom: 2px solid var(--ink);
-}
-
-.var-table td:first-child {
-  white-space: nowrap;
-}
-
-.var-table td:last-child {
-  color: var(--ink-dim);
-}
-
-.var-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-@media (max-width: 640px) {
-  .var-table { font-size: 0.84rem; }
-  .var-table th, .var-table td { padding: 0.75rem 1rem; }
 }
 
 /* ── Detail (research goal) pages ── */
