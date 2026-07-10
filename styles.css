@@ -503,32 +503,32 @@ hr.divider + section {
   margin: 1.25rem 0 1.75rem;
   overflow-x: auto;
   border: 1px solid var(--line);
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .var-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
 }
 
 .var-table th,
 .var-table td {
   text-align: left;
-  vertical-align: top;
-  padding: 0.65rem 1rem;
-  border: 1px solid var(--line);
+  vertical-align: middle;
+  padding: 1.05rem 1.5rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .var-table th {
   font-family: var(--sans);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent2);
   background: #f4efe6;
-  border-bottom: 2px solid var(--accent);
+  border-bottom: 2px solid var(--ink);
 }
 
 .var-table td:first-child {
@@ -540,35 +540,13 @@ hr.divider + section {
   color: var(--ink-dim);
 }
 
-.var-table tbody tr:nth-child(even) td {
-  background: var(--bg2);
-}
-
-.var-table tbody tr:nth-child(odd) td {
-  background: var(--card);
-}
-
-.var-table th:first-child,
-.var-table td:first-child {
-  border-left: none;
-}
-
-.var-table th:last-child,
-.var-table td:last-child {
-  border-right: none;
-}
-
-.var-table tr:first-child th {
-  border-top: none;
-}
-
 .var-table tbody tr:last-child td {
   border-bottom: none;
 }
 
 @media (max-width: 640px) {
-  .var-table { font-size: 0.82rem; }
-  .var-table th, .var-table td { padding: 0.5rem 0.6rem; }
+  .var-table { font-size: 0.84rem; }
+  .var-table th, .var-table td { padding: 0.75rem 1rem; }
 }
 
 /* ── Detail (research goal) pages ── */
