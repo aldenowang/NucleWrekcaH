@@ -337,6 +337,41 @@
     margin: 0.2rem 0.15rem 0 0;
   }
 
+  /* ── Research Goals ── */
+  .goal-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 1.75rem;
+    transition: box-shadow 0.2s;
+  }
+
+  .goal-card:hover {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+
+  .goal-num {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent2);
+    margin-bottom: 0.6rem;
+  }
+
+  .goal-card h3 {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+
+  .goal-card p {
+    color: var(--ink-dim);
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
   /* ── Results ── */
   #results {
     background: #f4f2ec;
@@ -632,9 +667,10 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#what-it-does">System</a></li>
+    <li><a href="#goals">Research</a></li>
     <li><a href="#results">Results</a></li>
     <li><a href="#authors">Authors</a></li>
-    <li><a href="#research">Research</a></li>
+    <li><a href="#research">References</a></li>
   </ul>
 </nav>
 
@@ -714,6 +750,33 @@
       <div class="card-num">MODULE 03</div>
       <h3>Adversarial Evaluation of Neural Operators</h3>
       <p>The agent targets Fourier Neural Operators and similar surrogate models, searching the input space for regions of high prediction error — inputs where the ML model's physics approximation breaks down and cannot be trusted for downstream inference or safety analysis.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- RESEARCH GOALS -->
+<section id="goals">
+  <div class="section-label">Research Questions</div>
+  <h2>Research Goals</h2>
+  <div class="cards">
+
+    <div class="goal-card">
+      <div class="goal-num">01</div>
+      <h3>Grounding Model Failure in Physical Consequence</h3>
+      <p>A "successful attack" against a surrogate model is currently defined in purely statistical terms — a spike in prediction error. We aim to reclassify that error in terms of real-world consequence: translating a surrogate model's failure mode into an estimate of the physical damage or safety-margin violation it would represent on an actual nuclear reactor.</p>
+    </div>
+
+    <div class="goal-card">
+      <div class="goal-num">02</div>
+      <h3>Black-Box Attack Discovery</h3>
+      <p>Can an LLM agent construct a successful adversarial attack against a surrogate model when given only black-box access to its inputs and outputs — with no visibility into model architecture, weights, or gradients?</p>
+    </div>
+
+    <div class="goal-card">
+      <div class="goal-num">03</div>
+      <h3>Generalizable Attack Strategies</h3>
+      <p>Beyond one-off adversarial examples, can an LLM derive a general formula or strategy that reliably and repeatably generates successful attacks — one that generalizes across simulators rather than exploiting a single model's quirks?</p>
     </div>
 
   </div>
