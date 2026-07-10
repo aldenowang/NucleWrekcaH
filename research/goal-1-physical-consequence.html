@@ -38,29 +38,27 @@
   <p><strong>2. Plausibility.</strong> Each perturbed input <span class="math-inline">$\tilde{b}_i$</span> must remain within one standard deviation of that input's average value in the training set. Standardizing against the training-set mean <span class="math-inline">$\mu_i$</span> and standard deviation <span class="math-inline">$\sigma_i$</span>:</p>
   <div class="math-block">$$\dfrac{\tilde{b}_i - \mu_i}{\sigma_i} \in [-1,\ 1] \quad \text{for every perturbed input } i$$</div>
 
-  <p><strong>3. Damage.</strong> Let <em>y</em> denote the true value of a monitored quantity (pressure or wall temperature), <span class="math-inline">$\hat{y}$</span> the surrogate model's predicted value for that quantity, and <em>L</em> the corresponding safety limit, defined next in the Damage Criteria below. An attack causes damage if it produces either of the following:</p>
-  <div class="math-block">$$\text{unsafe}_{\text{missed}}: \quad y > L \ \text{ and } \ \hat{y} < L$$</div>
-  <div class="math-block">$$\text{unsafe}_{\text{false-alarm}}: \quad y \le L \ \text{ and } \ \hat{y} > L$$</div>
-  <p><em>unsafe<sub>missed</sub></em> is a true failure that the surrogate model fails to flag; <em>unsafe<sub>false-alarm</sub></em> is a false failure the model reports when the true state is safe. Both cases apply independently to pressure and to wall temperature, using the corresponding limit <em>L</em> below.</p>
+  <p><strong>3. Damage.</strong> Let <em>y</em> denote the true value of a monitored quantity (pressure or wall temperature) and <span class="math-inline">$\hat{y}$</span> the surrogate model's predicted value for that quantity. Each quantity has an unsafe threshold <em>L</em><sub>unsafe</sub> and a conservative safe threshold <em>L</em><sub>safe</sub>, both defined next in the Damage Criteria below. An attack causes damage if it produces either of the following:</p>
+  <div class="math-block">$$\text{unsafe}_{\text{missed}}: \quad y \ge L_{\text{unsafe}} \ \text{ and } \ \hat{y} \le L_{\text{safe}}$$</div>
+  <div class="math-block">$$\text{unsafe}_{\text{false-alarm}}: \quad \hat{y} \ge L_{\text{unsafe}} \ \text{ and } \ y \le L_{\text{safe}}$$</div>
+  <p><em>unsafe<sub>missed</sub></em> is a true failure that the surrogate model fails to flag; <em>unsafe<sub>false-alarm</sub></em> is a false failure the model reports when the true state is safe. Both cases apply independently to pressure and to wall temperature, using the corresponding thresholds below.</p>
 
   <h3>Damage Criteria</h3>
-  <p class="criteria-intro">The safety limit <em>L</em> referenced in the damage condition above takes one of the following two forms, depending on which quantity is being monitored:</p>
+  <p class="criteria-intro">The thresholds <em>L</em><sub>unsafe</sub> and <em>L</em><sub>safe</sub> referenced in the damage condition above are defined as follows, depending on which quantity is being monitored:</p>
   <div class="criteria-grid">
     <div class="criteria-card">
       <div class="criteria-label">Pressure Limit</div>
       <div class="criteria-value">$P_{\max} = \dfrac{2\,S\,t}{D}$</div>
-      <p class="criteria-sub">Barlow's formula for the maximum allowable pipe-wall pressure, where <em>S</em> is the material's allowable stress, <em>t</em> the wall thickness, and <em>D</em> the outer diameter.</p>
+      <p class="criteria-sub">Barlow's formula for the maximum allowable pipe-wall pressure, where <em>S</em> is the material's allowable stress, <em>t</em> the wall thickness, and <em>D</em> the outer diameter. Pressure has no deadband: <em>L</em><sub>unsafe</sub> and <em>L</em><sub>safe</sub> both equal <em>P</em><sub>max</sub>.</p>
     </div>
     <div class="criteria-card">
-      <div class="criteria-label">Temperature Limit</div>
-      <div class="criteria-value">$T_{\text{wall}}(z) < 800^{\circ}\text{C}$</div>
-      <p class="criteria-sub">Absolute worst-case service temperature of 316H stainless steel, at any axial position <em>z</em>.</p>
+      <div class="criteria-label">Temperature Limits</div>
+      <div class="criteria-value">$L_{\text{unsafe}} = 800^{\circ}\text{C}$<br>$L_{\text{safe}} = 650^{\circ}\text{C}$</div>
+      <p class="criteria-sub">800°C is 316H stainless steel's absolute worst-case service temperature. 650°C is the conservative safe threshold from <a href="https://www.sciencedirect.com/science/article/pii/S0921509326003916" target="_blank" rel="noopener">this study</a>, leaving a deadband between the two where neither condition fires.</p>
     </div>
   </div>
 
   <p>The allowable stress <em>S</em> is temperature-dependent: it is read from the 1-hour creep-rupture lookup tables in an <a href="https://inldigitallibrary.inl.gov/content/uploads/50/2026/04/Sort_57445.pdf" target="_blank" rel="noopener">Idaho National Laboratory study</a>, at whatever wall temperature is being evaluated. We always use the 1-hour value specifically because it is conservative, the shortest and most restrictive duration in the table, and an unsafe condition such as a false alarm will not remain undetected for anywhere near that long. With a wall thickness <em>t</em> = 0.007112 m and outer diameter <em>D</em> = 1/6 m, for normal pressurized water reactor heat exchanger temperatures the pressure limit is approximately 9.39 MPa, and decreases as temperature increases.</p>
-
-  <p>800°C is the absolute worst-case limit for 316H, the point beyond which failure is assumed. To stay fully conservative, though, we treat the wall temperature as unsafe well before that: at or below <strong>650°C</strong>, per <a href="https://www.sciencedirect.com/science/article/pii/S0921509326003916" target="_blank" rel="noopener">this study</a>.</p>
 
   <h3>Deriving the Wall Temperature</h3>
   <p>The wall temperature at axial position <em>z</em> follows from Newton's law of cooling, relating it to the local fluid temperature and the local heat flux through the convective coefficient <em>h</em>:</p>
