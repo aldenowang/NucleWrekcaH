@@ -48,8 +48,8 @@
   <div class="criteria-grid">
     <div class="criteria-card">
       <div class="criteria-label">Pressure Limit</div>
-      <div class="criteria-value">$P_{\max} \approx 9.39\ \text{MPa}$</div>
-      <p class="criteria-sub">Maximum allowable pipe-wall pressure, derived from ASME pipe parameters via Barlow's formula.</p>
+      <div class="criteria-value">$P_{\max} = \dfrac{2\,S\,t}{D}$</div>
+      <p class="criteria-sub">Barlow's formula for the maximum allowable pipe-wall pressure, where <em>S</em> is the material's allowable stress, <em>t</em> the wall thickness, and <em>D</em> the outer diameter.</p>
     </div>
     <div class="criteria-card">
       <div class="criteria-label">Temperature Limit</div>
@@ -57,6 +57,8 @@
       <p class="criteria-sub">Maximum service temperature of 316H stainless steel, at any axial position <em>z</em>.</p>
     </div>
   </div>
+
+  <p>The allowable stress <em>S</em> is temperature-dependent: it is read from the 1-hour creep-rupture lookup tables in an <a href="https://inldigitallibrary.inl.gov/content/uploads/50/2026/04/Sort_57445.pdf" target="_blank" rel="noopener">Idaho National Laboratory study</a>, at whatever wall temperature is being evaluated. We always use the 1-hour value specifically because it is conservative, the shortest and most restrictive duration in the table, and an unsafe condition such as a false alarm will not remain undetected for anywhere near that long. With a wall thickness <em>t</em> = 0.007112 m and outer diameter <em>D</em> = 1/6 m, this formula yields a pressure limit of approximately 9.39 MPa.</p>
 
   <h3>Deriving the Wall Temperature</h3>
   <p>The wall temperature at axial position <em>z</em> follows from Newton's law of cooling, relating it to the local fluid temperature and the local heat flux through the convective coefficient <em>h</em>:</p>
